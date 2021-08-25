@@ -1,0 +1,29 @@
+créer le nouveau projet
+    ->symfony new nomprojet --full (--full pour avoir toutes les options) -->
+préparer le déploiement symfonyCloud
+    ->symfony project:init (cela crèè 3 fichiers)
+        dossier: .symfony avec 2 fichiers routes.yaml & services.yaml
+        1 fichier: .symfony.cloud.yaml
+            dans ce fichier modifier la version php utilisé, ici 8.0 par 7.4 et activer les 
+            lignes 7.4 qui suivent
+    Gitter l'ensemble
+        ->git add .
+        ->git commit -m 'initialisation sumfony cloud'
+Créer le projet sur le cloud
+    ->symfony project:create --title="nonprojet" --plan=development
+Déploier sur le cloud
+    ->symfony deploy
+vérification erreur 404 sur le cloud
+    ->symfony open:remote
+------
+info:
+pour avoir la liste des projects sur le cloud
+    ->symfony projects (bien relever le n°ID du projet si on veut l'effacer)
+pour effacer un projet sur le cloud
+    ->symfony project:delete --project=n°ID
+------
+Gitter après chaque journées de programmation && sauvegarder votre depot sur gitlab github
+ou gitbucket.
+Déploier également sur le cloud
+    ->symfony deploy
+

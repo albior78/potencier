@@ -4,12 +4,15 @@ type: php:7.4
 
 runtime:
     extensions:
+        - pdo_pgsql
         - apcu
         - mbstring
         - sodium
         - ctype
         - iconv
-        
+
+relationships:
+    postgres: "db:postgresql"
 
 variables:
     php:
