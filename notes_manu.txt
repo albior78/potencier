@@ -26,4 +26,36 @@ Gitter après chaque journées de programmation && sauvegarder votre depot sur g
 ou gitbucket.
 Déploier également sur le cloud
     ->symfony deploy
+-------------------------
+BDD postgresql avec Doker
+
+créer le fichier docker-compose.yaml
+    ->php bin/console make:docker:database
+        choisir postgresql
+éditer le fichier docker-compose.yaml
+    modifier la ligne avec:  image: 'postgres:13.4'
+éditer le fichier doctrine.yaml qui se trouve dans config package
+    rajouter en dessous DBAL : server_version: '13.4'
+éditer le fichier .env
+    placer: DATABASE_URL="postgresql://127.0.0.1:5432/db?serverVersion=13&charset=utf8"
+arrêter le server
+    ->symfony server:stop x2
+crée la database dans docker (le service se lance avec une database créee)
+    ->docker-compose up -d
+pour supprimer cette database
+    ->docker-compose down
+pour lister les containers docker
+    ->docker-compose ps
+pour avoir les logs de création
+    ->docker-compose logs
+lancer le serveur
+    ->symfony serve -d
+pour lister les variables d'environement
+    ->symfony var:export --multiline
+pour faire une migration fichier (préparation) il faut utiliser symfony console
+et non php bin/console
+    ->symfony console make:migration
+migration vers la BDD docker
+    ->symfony console doctrine:migrations:migrate
+
 
