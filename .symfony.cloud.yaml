@@ -4,6 +4,7 @@ type: php:7.4
 
 runtime:
     extensions:
+        - redis
         - pdo_pgsql
         - apcu
         - mbstring
@@ -12,7 +13,8 @@ runtime:
         - iconv
 
 relationships:
-    postgres: "db:postgresql"
+    database: "db:postgresql"
+    redis: "rediscache:redis"
 
 variables:
     php:
