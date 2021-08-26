@@ -13,7 +13,7 @@ Créer le projet sur le cloud
     ->symfony project:create --title="nonprojet" --plan=development
 Déploier sur le cloud
     ->symfony deploy
-vérification erreur 404 sur le cloud
+ouvrir chrome à partir du cloud
     ->symfony open:remote
 ------
 info:
@@ -26,7 +26,7 @@ Gitter après chaque journées de programmation && sauvegarder votre depot sur g
 ou gitbucket.
 Déploier également sur le cloud
     ->symfony deploy
--------------------------
+--------------------------------------------------
 BDD postgresql avec Doker
 
 créer le fichier docker-compose.yaml
@@ -57,5 +57,6 @@ et non php bin/console
     ->symfony console make:migration
 migration vers la BDD docker
     ->symfony console doctrine:migrations:migrate
+---------------------------------------------------------------
 
 
