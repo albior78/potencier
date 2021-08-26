@@ -39,6 +39,13 @@ class Conference
      */
     private $comments;
 
+    //-----------------------------------------------------------------
+    public function __toString()
+    {
+    return $this->city;
+    }
+    //-----------------------------------------------------------------
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
