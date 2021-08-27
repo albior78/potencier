@@ -19,9 +19,10 @@ class ConferenceController extends AbstractController
     {
         $this->twig = $twig;
     }
+
     /**
-     * @Route("/", name="homepage")
-     */
+    * @Route("/", name="homepage")
+    */
     public function index(ConferenceRepository $repo): Response
     {
         return new Response($this->twig->render('conference/index.html.twig', [
@@ -32,15 +33,16 @@ class ConferenceController extends AbstractController
     /**
      * @Route("/conference/{id}", name="conference")
      */
-    public function show(Request $req, Conference $conference, CommentRepository $repo ): Response
+    public function show(Request $req, Conference $conference, ConferenceRepository $repo, CommentRepository $repo1 ): Response
     {
         $offset = max(0, $req->query->getInt('offset', 0));
-        $paginator = $repo->getCommentPaginator($conference, $offset);
+        $paginator = $repo1->getCommentPaginator($conference, $offset);
         return new Response($this->twig->render('conference/show.html.twig', [
+            'conferences' => $repo->findAll(),
             'conference' => $conference,
             'comments' => $paginator,
-            'previous' => $offset - $repo::PAGINATOR_PER_PAGE,
-            'next' => min(count($paginator), $offset + $repo::PAGINATOR_PER_PAGE),
+            'previous' => $offset - $repo1::PAGINATOR_PER_PAGE,
+            'next' => min(count($paginator), $offset + $repo1::PAGINATOR_PER_PAGE),
         ]));
     }
 }

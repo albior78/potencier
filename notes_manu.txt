@@ -58,5 +58,48 @@ et non php bin/console
 migration vers la BDD docker
     ->symfony console doctrine:migrations:migrate
 ---------------------------------------------------------------
+mettre en place un Worflow Git avec redis
+    -dans php.ini vérifier extension=redis activer (retirer le ; devant)
+     si pas present dans .ini télécharger chez pecl l'extension
+    -créer une branche git en locale  dans qui bascule sur la branche implent_redis
+        ->git checkout -b implent_redis
+    -rajouter dans .symfony.cloud.yaml
+        -> - redis (sous extentions:)
+        -> redis: "rediscache:redis" (sous database: "bd:postgresql")
+    -rajouter dans .symfony/services.yaml
+        ->rediscache: (au même niveau que db)
+            type: redis:5.0
+    -rajouter dans /config/packages/framework.yaml
+        -> '%ev(REDIS_URL)%' (derrière handler_id: (à la place de null)
+    -rajouter le service redis à docker dans docker-compose.yaml
+        ->redis:
+            image: redis:5-alpine
+            ports:
+                - "6379"
+    -stopper docker
+        ->docker-compose stop
+    -relancer tous les services docker-compose
+        ->docker-compose up -d
+    -mettre a jour la branche implent_redis
+        ->git add .
+        ->git commit -m 'mise en place redis'
+    -créer la branche implent_redis sur symfonyCloud
+        ->symfony env:create
+    -fusionner implent_redis sur master symfonyCloud
+        ->symfony env:sync
+    -on peut passer en mode debug avant de deployer
+        ->symfony env:debug
+    -et repasser en mode prod
+        ->symfony env:debug --off
+    -revenir sur le master en local
+        ->git checkout master
+    -fusionner la branche implent_redis avec le master
+        ->git merge implent_redis
+    -deployer
+        ->symfony deploy
+    -supprimer en locale la branche
+        ->git branch -d implent_redis
+    -supprimer la branch sur le sumfonycloud
+        ->symfony env:delete --env=implent_redis --no-interection
 
 
