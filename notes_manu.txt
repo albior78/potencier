@@ -91,6 +91,7 @@ mettre en place un Worflow Git avec redis
         ->symfony env:debug
     -et repasser en mode prod
         ->symfony env:debug --off
+        si on fait ->symfony open:remote on peut voir la barre symfony de debug en bas
     -revenir sur le master en local
         ->git checkout master
     -fusionner la branche implent_redis avec le master
@@ -100,6 +101,6 @@ mettre en place un Worflow Git avec redis
     -supprimer en locale la branche
         ->git branch -d implent_redis
     -supprimer la branch sur le sumfonycloud
-        ->symfony env:delete --env=implent_redis --no-interection
+        ->symfony env:delete --env=implent_redis --no-interaction
 
 
