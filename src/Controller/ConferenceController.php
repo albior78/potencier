@@ -31,7 +31,7 @@ class ConferenceController extends AbstractController
     }
 
     /**
-     * @Route("/conference/{id}", name="conference")
+     * @Route("/conference/{slug}", name="conference")
      */
     public function show(Request $req, Conference $conference, ConferenceRepository $repo, CommentRepository $repo1 ): Response
     {
