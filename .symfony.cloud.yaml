@@ -37,7 +37,7 @@ web:
 
 mounts:
     "/var": { source: local, source_path: var }
-    "/public/upload": { source: local, souce_path: upload }
+    "/public/upload": { source: local, source_path: upload }
 
 hooks:
     build: |
