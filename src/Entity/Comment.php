@@ -2,12 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\CommentRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\CommentRepository;
 
 /**
  * @ORM\Entity(repositoryClass=CommentRepository::class)
  * @ORM\HasLifecycleCallbacks()
+ *
  */
 class Comment
 {
@@ -20,16 +21,19 @@ class Comment
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
      */
     private $author;
 
     /**
      * @ORM\Column(type="text")
+     *
      */
     private $text;
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
      */
     private $email;
 
