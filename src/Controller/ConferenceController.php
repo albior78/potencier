@@ -61,9 +61,11 @@ class ConferenceController extends AbstractController
                 }
                 $comment->setPhotoFilename($filename);
             }
-        
+
             $this->em->persist($comment);
+
             $this->em->flush();
+
             return $this->redirectToRoute('conference', ['slug' => $conference->getSlug()]);
         }
 
