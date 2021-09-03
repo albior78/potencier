@@ -102,5 +102,30 @@ mettre en place un Worflow Git avec redis
         ->git branch -d implent_redis
     -supprimer la branch sur le sumfonycloud
         ->symfony env:delete --env=implent_redis --no-interaction
+--------------------------------------------------------------------------
+rajouter une gestion des messages(d'attentes) en asynchrone avec RabbitMQ dans docker
+    installer messenger (voir 18.2 du livre)
+        ->symfony composer req messenger
+    modifier /config/packages/messenger.yaml
+        async: '%env(RABBITMQ_DSN)%' (en desous en décalé de transports:)
+        App\Message\CommentMessage: async (en dessous en décalé de routing:)
+    installer rabbitMQ dans docker
+        modifier docker-compose.yaml (en dessous services en décalé)
+            rabbitmq:
+                image: rabbitmq:3.9.5-management
+                ports:
+                    - '5672'
+                    - '15672'
+        stopper les services docker
+            ->docker-compose stop
+        relancer les services docker
+            ->docker-compose up -d (pour info: -d tache de fond)
+    Explorer l'interface web de gestion de RabbitMQ
+        ->symfony open:local:rabbitmq
+            username & mdp: guest
 
+pour sauvegarder la BDD dans de docker:
+    ->docker-compose exec nomdelabase pg_dump --data-only > dump.sql
+pour la restauration:
+    ->docker-compose exec nomdelabase psql < dump.sql
 
